@@ -13,7 +13,7 @@
         <div class="q-pa-md">
       <q-btn-dropdown
         class="glossy"
-        color="red"
+        color="orange"
 
       >
         <template v-slot:label>
@@ -33,11 +33,12 @@
         <q-separator vertical inset class="q-mx-lg" />
 
         <div class="column items-center">
-          <q-avatar size="72px">
 
-          </q-avatar>
-
-          <div class="text-subtitle1 q-mt-md q-mb-xs"></div>
+          <div class="text-subtitle1 q-mt-md q-mb-xs">
+            <q-btn align="around" class="btn-fixed-width"
+            color="red" label="Privacidade" icon="lightbulb_outline"
+            @click="abrirDetalhes" />
+          </div>
 
           <q-btn
             color="primary"
@@ -53,12 +54,30 @@
   </div>
       </q-toolbar>
 
-      <q-tabs align="right">
+      <!-- <q-tabs align="right">
         <q-route-tab to="/" label="Pedidos" />
         <q-route-tab to="/" label="Informações"/>
         <q-route-tab to="/" label="Sobre nós" />
-      </q-tabs>
+      </q-tabs> -->
 
+      <q-dialog v-model="dialogDetalhes">
+        <q-card
+          class="my-card text-white"
+          style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
+          >
+          <q-card-section>
+            <div class="text-h6">Política de Privacidade</div>
+            <div class="text-subtitle2">por Paulo Henrique</div>
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            {{ lorem }}
+          </q-card-section>
+          <q-card-actions align="center">
+                <q-btn label="Fechar" color="orange" @click="fecharDetalhes" />
+          </q-card-actions>
+        </q-card>
+    </q-dialog>
     </q-header>
 
     <q-drawer v-model="rightDrawerOpen" side="right" bordered>
@@ -74,6 +93,7 @@
     </q-footer>
 
   </q-layout>
+
 </template>
 
 <script>
@@ -83,11 +103,19 @@ export default {
   setup () {
     const rightDrawerOpen = ref(false)
     const darkMode = ref(false)
+    const dialogDetalhes = ref(false)
 
     watch(darkMode, (newVal) => {
       document.documentElement.classList.toggle('dark-theme', newVal)
-      // Aqui você pode adicionar qualquer lógica adicional para personalizar seu tema
     })
+
+    const abrirDetalhes = () => {
+      dialogDetalhes.value = true
+    }
+
+    const fecharDetalhes = () => {
+      dialogDetalhes.value = false
+    }
 
     function fazerLogoff () {
       // Lógica para o logoff
@@ -98,19 +126,12 @@ export default {
 
     return {
       rightDrawerOpen,
+      dialogDetalhes,
       darkMode,
+      abrirDetalhes,
+      fecharDetalhes,
+      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       fazerLogoff
-    }
-  },
-  computed: {
-
-    isUser () {
-      const auth = localStorage.getItem('auth')
-      return auth === 'user'
-    },
-    isAgente () {
-      const auth = localStorage.getItem('auth')
-      return auth === 'agente'
     }
   }
 }

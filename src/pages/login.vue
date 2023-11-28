@@ -11,8 +11,9 @@
           @reset="onReset"
           class="q-gutter-md"
         >
-          <q-input class="entrada" rounded outlined v-model="username" label="E-mail" />
-          <q-input class="entrada" rounded outlined v-model="password" @keyup.enter="submitForm"
+
+          <q-input class="entrada" outlined v-model="username" label="E-mail" />
+          <q-input class="entrada" outlined v-model="password" @keyup.enter="submitForm"
           type="password" label="Senha" />
           <div class="card0">
             <q-btn
@@ -73,6 +74,7 @@
 
 <script>
 import { QSpinner } from 'quasar'
+import { api } from 'boot/axios'
 
 export default {
   name: 'login_',
@@ -87,6 +89,41 @@ export default {
       showButton: true,
       persistent: false,
       missingFieldsDialog: false
+    }
+  },
+
+  methods: {
+    async submitForm (event) {
+      event.preventDefault()
+
+      if (this.username && this.password) {
+        try {
+          this.loading = true
+          this.showButton = false
+
+          const payload = {
+            email: this.username,
+            senha: this.password
+          }
+
+          const response = await api.post('/login', payload)
+          const { token } = response.data
+          const { tipo } = response.data
+
+          localStorage.setItem('token', token)
+          localStorage.setItem('tipo', tipo)
+
+          this.$router.push('/home')
+        } catch (error) {
+          console.log(error)
+          this.persistent = true
+        } finally {
+          this.loading = false
+          this.showButton = true
+        }
+      } else {
+        this.missingFieldsDialog = true
+      }
     }
   }
 
