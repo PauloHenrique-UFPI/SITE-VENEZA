@@ -240,6 +240,9 @@ export default defineComponent({
       if (this.isCozinheiro) {
         this.$router.push({ name: 'cozinheiro' })
       }
+      if (this.isEntregador) {
+        this.$router.push({ name: 'pronto' })
+      }
       const token = localStorage.getItem('token')
       try {
         const response = await api.get('/todos-pedidos', {
@@ -247,7 +250,7 @@ export default defineComponent({
             Authorization: `Bearer ${token}`
           }
         })
-        this.pedidos = response.data.groups
+        this.pedidos = response.data.groups.sort((a, b) => a.id - b.id)
         this.isLoading = false
       } catch (error) {
         console.log(error)
@@ -353,7 +356,7 @@ export default defineComponent({
           return 'red'
 
         default:
-          return 'orange' // Cor padrão ou outra cor desejada
+          return 'orange'
       }
     }
 
@@ -368,7 +371,7 @@ export default defineComponent({
   font-weight: bold;
   padding: 10px;
   border: 10px solid #FFA500;
-  background-color: #FFFF00;
+  background-color: #14d111;
   border-radius: 10px;
   color: #000000;
   margin-bottom: 20px;

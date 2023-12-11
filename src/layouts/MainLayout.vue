@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh Lpr fFf" :class="{'dark-theme': darkMode}">
 
-    <q-header elevated class="text-red" height-hint="98" style="background: linear-gradient(to right, rgb(255, 255, 255), orange);">
+    <q-header elevated class="text-black" height-hint="98" style="background: linear-gradient(to right, rgb(255, 255, 255), orange);">
       <q-toolbar>
         <q-toolbar-title style="font-family: 'Comic Sans MS'; font-size: 30px;">
           <q-avatar>
@@ -36,7 +36,7 @@
 
           <div class="text-subtitle1 q-mt-md q-mb-xs">
             <q-btn align="around" class="btn-fixed-width"
-            color="red" label="Privacidade" icon="lightbulb_outline"
+            color="orange" label="Privacidade" icon="lightbulb_outline"
             @click="abrirDetalhes" />
           </div>
 
@@ -55,9 +55,14 @@
       </q-toolbar>
 
       <q-tabs align="right">
-        <q-route-tab to="/cozinheiro" label="Lista Pedidos" v-if="isCozinheiro || isAdm"/>
-        <q-route-tab to="/pronto" label="Pedidos Prontos" v-if="isCozinheiro || isAdm"/>
-        <q-route-tab to="/sobre" label="Sobre nós" />
+        <q-route-tab to="/cozinheiro" label="Lista " class="t1"
+        icon="view_list"
+         v-if="isCozinheiro || isAdm"/>
+        <q-route-tab to="/pronto" label="Preparado" class="t2"
+        icon="receipt_long"
+         v-if="isCozinheiro || isAdm || isEntregador"/>
+        <q-route-tab to="/entrega" label="Minhas Entregas" v-if=" isEntregador"/>
+        <q-route-tab to="/sobre" class="t4" icon="pageview" label="Sobre nós" />
       </q-tabs>
 
       <q-dialog v-model="dialogDetalhes">
@@ -143,6 +148,10 @@ export default {
     isAdm () {
       const tipo = localStorage.getItem('tipo')
       return tipo === 'adm'
+    },
+    isEntregador () {
+      const tipo = localStorage.getItem('tipo')
+      return tipo === 'entregador'
     }
   }
 }
@@ -162,5 +171,17 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+}
+
+.t1 {
+  color: green;
+}
+
+.t2 {
+  color: orangered;
+}
+
+.t4 {
+  color: brown;
 }
 </style>

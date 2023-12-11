@@ -10,8 +10,8 @@
 
     <div>
       <div>
-        <q-item-label header align="center" class="custom-header-label">
-          Pedidos Pendentes
+        <q-item-label header align="center" class="custom-header-label3">
+          Pedidos Prontos
         </q-item-label>
       </div>
 
@@ -119,7 +119,7 @@ export default defineComponent({
   },
   computed: {
     pedidosFiltrados () {
-      return this.pedidos.filter(pedido => pedido.status === 'on')
+      return this.pedidos.filter(pedido => pedido.status === 'entrega')
     }
   },
   methods: {
@@ -239,13 +239,13 @@ export default defineComponent({
 </script>
 
 <style>
-.custom-header-label {
+.custom-header-label3 {
   font-size: 24px;
   font-family: 'Courier New';
   font-weight: bold;
   padding: 10px;
   border: 10px solid #FFA500;
-  background-color: #FFFF00;
+  background-color: orangered;
   border-radius: 10px;
   color: #000000;
   margin-bottom: 20px;
