@@ -28,7 +28,7 @@
       navigation-icon="radio_button_unchecked"
       height="300px"
       class="bg-orange text-white rounded-borders"
-      style="height: 400px;"
+      style="height: 400px; top: 20px;"
     >
       <q-carousel-slide :name="1" class="text-center">
         <q-scroll-area class="fit">
@@ -111,6 +111,39 @@
         </q-scroll-area>
       </q-carousel-slide>
     </q-carousel>
+
+    <q-card class="my-card q-ma-auto" flat bordered>
+    <q-card-section horizontal class="flex">
+      <q-card-section style="min-width: 50%">
+        <div class="text-h6">🎊 Pizzaria Veneza:Uma História de Sabor! 🎊</div>
+        <q-separator spaced inset vertical dark />
+        <div class="text-h7">📍 R. São Sebastião, 799 - Canto da Várzea, Picos - PI, 64600-000 </div>
+        <div class="text-h7">☎️ Telefone: (89) 99919-4045</div>
+        <div class="text-h7">🌐 Saiba mais: [Site da Pizzaria]</div>
+      </q-card-section>
+
+      <q-separator vertical />
+      <div class="card" v-for="(pessoa, index) in devs"
+          :key="index">
+        <div class="card-content">
+          <h6 class="name"> {{ pessoa.nome }}</h6>
+          <p class="description">Bacharelando em Sistemas de Informação CSHNB - Picos PI</p>
+          <div class="social-links">
+            <a :href= "pessoa.linkedin" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/linkedin.png" alt="Linkedin" />
+            </a>
+            <a :href= "pessoa.git" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/github_PNG4.png" alt="GitHub" />
+            </a>
+        <a :href= "pessoa.email" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/gmail.png" alt="Gmail" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </q-card-section>
+  </q-card>
   </div>
 </template>
 
@@ -122,13 +155,39 @@ export default defineComponent({
   setup () {
     return {
       slide: ref(1),
-      autoplay: ref(true)
+      autoplay: ref(true),
+      devs: [
+        {
+          nome: 'Paulo Henrique',
+          img: '../assets/paulo.jpg',
+          linkedin: 'https://www.linkedin.com/in/paulo-henrique-5792ab274',
+          git: 'https://github.com/PauloHenrique-UFPI',
+          email: 'mailto:hunter404paulo@gmail.com'
+        },
+        {
+          nome: 'Isdael Rodrigues',
+          img: '../assets/paulo.jpg',
+          linkedin: 'https://www.linkedin.com/in/paulo-henrique-5792ab274',
+          git: 'https://github.com/PauloHenrique-UFPI',
+          email: 'mailto:hunter404paulo@gmail.com'
+        },
+        {
+          nome: 'Hudson Cardoso',
+          img: '../assets/paulo.jpg',
+          linkedin: 'https://www.linkedin.com/in/paulo-henrique-5792ab274',
+          git: 'https://github.com/PauloHenrique-UFPI',
+          email: 'mailto:hunter404paulo@gmail.com'
+        }
+      ]
     }
   }
 })
 </script>
 
 <style scoped>
+.my-card {
+  top: 20px;
+}
 .imgbanner {
   height: 200px;
   width: 50%;
@@ -182,12 +241,15 @@ export default defineComponent({
   left: 0;
   right: 0;
   bottom: 0;
+
   width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 5px;
+  padding: 0%;
 }
 .card-img {
   width: 200%;

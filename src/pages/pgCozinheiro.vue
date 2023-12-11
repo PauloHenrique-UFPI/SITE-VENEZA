@@ -7,7 +7,20 @@
       backgroundPosition: 'center'
     }"
   >
+  <q-card class="cardPer">
+    <img src="../assets/duvida.jpg" style="max-width: 450px; height: 250px;">
 
+    <q-card-section>
+      <h2 class="text-h6">Regras do Sistema:</h2>
+      <ul>
+        <li>Preparar sempre o pedido no topo da lista</li>
+        <li>Caso não for possível fazer o pedido, informar</li>
+        <li>Ao terminar de preparar o pedido, marque como "Pronto"</li>
+        <li>Mantenha seu ambiente de trabalho sempre organizado</li>
+      </ul>
+    </q-card-section>
+  </q-card>
+  <q-separator spaced inset vertical  />
     <div>
       <div>
         <q-item-label header align="center" class="custom-header-label">
@@ -249,6 +262,16 @@ export default defineComponent({
   border-radius: 10px;
   color: #000000;
   margin-bottom: 20px;
+}
+
+.cardPer {
+  padding: 10px;
+  border: 10px solid #FFA500;
+  background-color: #FFFF00;
+  border-radius: 10px;
+  color: #000000;
+  margin-bottom: 20px;
+
 }
 
 .custom-avatar {

@@ -8,6 +8,22 @@
     }"
   >
 
+  <q-card class="cardPer2">
+    <img src="../assets/entrega.jpg" style="max-width: 450px; height: 250px;">
+
+    <q-card-section>
+      <h2 class="text-h6">Regras do Sistema:</h2>
+      <ul>
+        <li>Os pedidos no topo da lista tem PRIORIDADE</li>
+        <li>Cada entregador deve pegar os pedidos aqui</li>
+        <li>Pedidos pegos na Lista por engano podem ser devolvidos</li>
+        <li>O pedido pode ser devolvido na tela do entregador</li>
+      </ul>
+    </q-card-section>
+  </q-card>
+
+  <q-separator spaced inset vertical  />
+
     <div>
       <div>
         <q-item-label header align="center" class="custom-header-label3">
@@ -74,7 +90,6 @@
           </q-card-section>
           <q-card-actions align="center">
             <q-btn label="Fechar" color="orange" @click="fecharDetalhesPedido" />
-            <q-btn label="Pronto para Envio" color="green" @click="submitFormStatus" />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -249,6 +264,16 @@ export default defineComponent({
   border-radius: 10px;
   color: #000000;
   margin-bottom: 20px;
+}
+
+.cardPer2 {
+  padding: 10px;
+  border: 10px solid #FFA500;
+  background-color: orangered;
+  border-radius: 10px;
+  color: #000000;
+  margin-bottom: 20px;
+
 }
 
 .custom-avatar {
