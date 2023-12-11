@@ -54,11 +54,11 @@
   </div>
       </q-toolbar>
 
-      <!-- <q-tabs align="right">
-        <q-route-tab to="/" label="Pedidos" />
-        <q-route-tab to="/" label="Informações"/>
-        <q-route-tab to="/" label="Sobre nós" />
-      </q-tabs> -->
+      <q-tabs align="right">
+        <q-route-tab to="/cozinheiro" label="Lista Pedidos" v-if="isCozinheiro || isAdm"/>
+        <q-route-tab to="/pronto" label="Pedidos Prontos" v-if="isCozinheiro || isAdm"/>
+        <q-route-tab to="/sobre" label="Sobre nós" />
+      </q-tabs>
 
       <q-dialog v-model="dialogDetalhes">
         <q-card
@@ -132,6 +132,17 @@ export default {
       fecharDetalhes,
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       fazerLogoff
+    }
+  },
+
+  computed: {
+    isCozinheiro () {
+      const tipo = localStorage.getItem('tipo')
+      return tipo === 'cozinheiro'
+    },
+    isAdm () {
+      const tipo = localStorage.getItem('tipo')
+      return tipo === 'adm'
     }
   }
 }

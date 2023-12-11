@@ -7,17 +7,6 @@
       backgroundPosition: 'center'
     }"
   >
-    <div class="add" style="position: absolute;">
-      <q-fab
-        vertical-actions-align="right"
-        color="orange"
-        glossy
-        icon="keyboard_arrow_up"
-        direction="up"
-      >
-        <q-fab-action color="green" icon="add" label="Adicionar" @click="abrirAddPedido" />
-      </q-fab>
-    </div>
 
     <div>
       <div>
@@ -28,13 +17,14 @@
 
       <q-list bordered class="rounded-borders" style="max-width: 600px; overflow-y: auto; max-height: 400px;">
         <q-item
-          v-for="(pedido, index) in pedidos"
+          v-for="(pedido, index) in pedidosFiltrados"
           :key="index"
           class="q-mb-xl"
+
           style="background-color: aliceblue; border-radius: 30px; width: 400px; margin-bottom: 12px;"
         >
           <q-item-section top class="col-2 gt-sm">
-            <q-avatar :color="getAvatarColor(pedido.status)" text-color="white" class="custom-avatar">
+            <q-avatar color="orange" text-color="white" class="custom-avatar">
             </q-avatar>
           </q-item-section>
 
@@ -52,9 +42,6 @@
 
           <q-item-section top side>
             <div class="text-grey-8 q-gutter-xs">
-              <q-btn class="gt-xs" size="12px" flat dense round icon="delete"
-              @click="deletarPedido(pedido.id)"/>
-              <q-btn class="gt-xs" size="12px" flat dense round icon="edit" />
               <q-btn
                 class="gt-xs"
                 size="12px"
@@ -182,6 +169,7 @@
           </q-card-section>
           <q-card-actions align="center">
             <q-btn label="Fechar" color="orange" @click="fecharDetalhesPedido" />
+            <q-btn label="Pronto para Envio" color="green" @click="fecharDetalhesPedido" />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -194,7 +182,6 @@ import { defineComponent } from 'vue'
 import { api } from 'boot/axios'
 
 export default defineComponent({
-  name: 'IndexPage',
   data () {
     return {
       pedidos: [],
@@ -226,20 +213,12 @@ export default defineComponent({
     this.carregar()
   },
   computed: {
-    isCozinheiro () {
-      const tipo = localStorage.getItem('tipo')
-      return tipo === 'cozinheiro'
-    },
-    isEntregador () {
-      const tipo = localStorage.getItem('tipo')
-      return tipo === 'entregador'
+    pedidosFiltrados () {
+      return this.pedidos.filter(pedido => pedido.status === 'on')
     }
   },
   methods: {
     async carregar () {
-      if (this.isCozinheiro) {
-        this.$router.push({ name: 'cozinheiro' })
-      }
       const token = localStorage.getItem('token')
       try {
         const response = await api.get('/todos-pedidos', {
@@ -336,24 +315,6 @@ export default defineComponent({
         this.loading = false
       } finally {
         this.loading = false
-      }
-    },
-
-    getAvatarColor (status) {
-      switch (status) {
-        case 'on':
-          return 'green'
-        case 'preparando':
-          return 'orange'
-        case 'entrega':
-          return 'yellow'
-        case 'finalizado':
-          return 'blue'
-        case 'cancelado':
-          return 'red'
-
-        default:
-          return 'orange' // Cor padrão ou outra cor desejada
       }
     }
 
