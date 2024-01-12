@@ -1,17 +1,12 @@
 <template>
-  <q-page class="page flex justify-center" :style="{
-      backgroundImage: `url(${require('../assets/pizza2.jpg')})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }">
-    <div class="q-pa-md" style="min-width: 35%;">
+  <q-page class="flex justify-center image-container" >
+    <div class="q-pa-md" style="min-width: 400px;">
       <q-card class="my-card0">
         <q-form
           @submit="onSubmit"
           @reset="onReset"
           class="q-gutter-md"
         >
-
           <q-input class="entrada" outlined v-model="username" label="E-mail" />
           <q-input class="entrada" outlined v-model="password" @keyup.enter="submitForm"
           type="password" label="Senha" />
@@ -80,6 +75,7 @@ export default {
   name: 'login_',
   components: {
     QSpinner
+
   },
   data () {
     return {
@@ -135,7 +131,7 @@ export default {
   top: 10%;
   padding: 10%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background-color: rgb(216, 212, 5,0.5);
 }
 
 .card0 {
@@ -143,8 +139,20 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
-.entrada{
-
+.image-container {
+  position: relative;
+  background-image: url('../assets/pizza2.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px; /* Ajuste a altura conforme necessário */
+}
+.image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(rgba(255, 255, 255, 0.4) 10%,  rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 70%);
 }
 </style>

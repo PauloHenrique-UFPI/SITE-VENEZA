@@ -172,7 +172,7 @@ export default defineComponent({
           email: 'mailto:hunter404paulo@gmail.com'
         },
         {
-          nome: 'Hudson Cardoso',
+          nome: 'Hudson Bandeira',
           img: '../assets/paulo.jpg',
           linkedin: 'https://www.linkedin.com/in/paulo-henrique-5792ab274',
           git: 'https://github.com/PauloHenrique-UFPI',
