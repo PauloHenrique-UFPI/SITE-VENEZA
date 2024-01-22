@@ -7,7 +7,7 @@
             <!-- <q-avatar>
               <img src="../assets/logo.png">
             </q-avatar> -->
-           <a href="/">
+           <a href="/#/home">
             <span style="color: #ffaa3b;">Pizzaria</span>
             <span style="color: #00FF00;"> Veneza</span>
           </a>
@@ -16,7 +16,7 @@
 
           <!-- Adicione v-if diretamente ao q-tabs -->
           <q-tabs v-if="!isSmallScreen" align="right">
-            <q-route-tab to="/index" class="t1" label="Inicio"/>
+            <q-route-tab to="/homeL" class="t1" label="Inicio"/>
             <q-route-tab to="/sobre" class="t1" label="Sobre nós"/>
             <q-route-tab to="/contato" class="t1" label="Contato"/>
             <q-btn
@@ -25,6 +25,7 @@
               class="q-px-xl q-py-xs"
               color="orange"
               label="Login"
+              to="/"
             />
           </q-tabs>
 
@@ -78,7 +79,7 @@
             </q-item-label>
           </q-item-section>
         </q-item>
-        <q-item v-if="!isAuth" clickable @click="navigateTo('/login')">
+        <q-item v-if="!isAuth" clickable @click="navigateTo('/')">
           <q-item-section avatar>
             <q-avatar>
               <q-icon name="login" color="orange" />

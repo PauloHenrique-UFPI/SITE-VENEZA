@@ -27,6 +27,9 @@ module.exports = configure(function (ctx) {
       'i18n'
 
     ],
+    meta: {
+      title: 'Novo Nome da Página' // Defina o título desejado aqui
+    },
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: [
@@ -127,8 +130,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
+        name: 'Pizzaria Veneza',
+        short_name: 'Pizzaria Veneza',
         description: 'A Quasar Project',
         display: 'standalone',
         orientation: 'portrait',
